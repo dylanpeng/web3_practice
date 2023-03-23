@@ -10,6 +10,7 @@ import (
 	"web3_practice/common"
 	"web3_practice/gateway/config"
 	"web3_practice/gateway/router"
+	"web3_practice/gateway/util"
 )
 
 var (
@@ -37,6 +38,11 @@ func main() {
 		_ = common.Logger.Sync()
 		_ = common.Logger.Close()
 	}()
+
+	// init eth client
+	if err := util.InitEthClient(); err != nil {
+		log.Fatalf("Fatal Error: can't initialize eth client!!!\n%s", err)
+	}
 
 	// start http server
 	common.InitHttpServer(router.Router)

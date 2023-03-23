@@ -4,8 +4,8 @@ go 1.20
 
 require (
 	github.com/BurntSushi/toml v1.2.1
-	github.com/dylanpeng/golib v0.0.0-20230317081244-66cc34314d1f
-	github.com/ethereum/go-ethereum v1.11.4
+	github.com/dylanpeng/golib v0.0.0-20230323011026-14f8e4c5be9a
+	github.com/ethereum/go-ethereum v1.11.5
 	github.com/gin-gonic/gin v1.9.0
 	github.com/google/uuid v1.3.0
 	google.golang.org/protobuf v1.30.0
@@ -20,6 +20,7 @@ require (
 	github.com/deckarep/golang-set/v2 v2.1.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.1.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gin-contrib/pprof v1.4.0 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/contrib v0.0.0-20221130124618-7e01895a63f2 // indirect
@@ -31,9 +32,9 @@ require (
 	github.com/go-stack/stack v1.8.1 // indirect
 	github.com/goccy/go-json v0.10.1 // indirect
 	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/holiman/uint256 v1.2.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/jonboulle/clockwork v0.3.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/leodido/go-urn v1.2.2 // indirect
