@@ -12,9 +12,35 @@ message Transaction{
 
     string amount = 4;
 
-    string gas_fee = 5;
+    uint64 gas = 5;
 
     string gas_price = 6;
+
+    string gas_tip = 7;
+
+    string gas_fee = 8;
+
+    uint64 nonce = 9;
+
+    string cost = 10;
+
+    string chain_id = 11;
+
+    bool is_pending = 12;
+
+    string block_hash = 13;
+
+    string block_number = 14;
+
+    uint64 transaction_index = 15;
+
+    uint32 type = 16;
+
+    uint64 status = 17;
+
+    uint64 gas_used = 18;
+
+    string effective_gas_price = 19;
 }
 
 
@@ -32,3 +58,53 @@ message GetTransactionRsp{
     Transaction data = 3;
 }
 
+// HTTP Get request: /blockchain/account/detail
+message GetAccountDetailReq{
+    string address = 1;
+}
+
+// HTTP Get request: /blockchain/account/detail
+message GetAccountDetailRsp{
+    // response code
+    int64 code = 1;
+    // response message
+    string message = 2;
+
+    // 账号
+    EthAccount data = 3;
+}
+
+message EthAccount{
+    // account address
+    string address = 1;
+
+    // 余额
+    string balance = 2;
+
+    // nonce
+    uint64 nonce = 3;
+}
+
+// HTTP Get request: /blockchain/gas/suggest
+message GetEthSuggestGasReq{
+
+}
+
+// HTTP Get request: /blockchain/gas/suggest
+message GetEthSuggestGasRsp{
+    // response code
+    int64 code = 1;
+    // response message
+    string message = 2;
+
+    // 账号
+    GasDetail data = 3;
+}
+
+message GasDetail{
+    // gas price suggest
+    string gas_price_suggest = 1;
+
+    // gas tip cap suggest
+    string gas_tip_cap_suggest = 2;
+}

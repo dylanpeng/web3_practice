@@ -17,37 +17,124 @@ var BlockChain = &blockChainCtrl{}
 type blockChainCtrl struct{}
 
 func (c *blockChainCtrl) GetTransactionDetail(ctx *gin.Context) {
-	req := &blockchain.GetTransactionReq{}
-
-	if !ctrl.DecodeReq(ctx, req) {
-		return
+	req := &blockchain.GetTransactionReq{
+		Tx: ctx.Param("tx"),
 	}
 
 	if !ctrl.ParamAssert(ctx, req, req.Tx == "") {
 		return
 	}
 
-	// 0x71c7656ec7ab88b098defb751b7401b5f6d8976f
-	account := common.HexToAddress("0x5B7f33E9f0B24465cBD575d3cb354D286a9DF576")
-	balance, err := util.EthClient.GetClient().BalanceAt(context.Background(), account, nil)
+	txHash := common.HexToHash(req.Tx)
+	tx, ispending, err := util.EthClient.GetClient().TransactionByHash(context.Background(), txHash)
 	if err != nil {
-		oCommon.Logger.Warningf("GetTransactionDetail BalanceAt fail. | err: %s", err)
+		oCommon.Logger.Warningf("GetTransactionDetail TransactionByHash fail. | err: %s", err)
 		ctrl.Exception(ctx, exception.New(exception.CodeInternalError))
 		return
 	}
 
-	oCommon.Logger.Infof("balance: %s", balance)
+	receipt, err := util.EthClient.GetClient().TransactionReceipt(context.Background(), txHash)
+	if err != nil {
+		oCommon.Logger.Warningf("GetTransactionDetail TransactionReceipt fail. | err: %s", err)
+		ctrl.Exception(ctx, exception.New(exception.CodeInternalError))
+		return
+	}
+
+	sender, err := util.EthClient.GetClient().TransactionSender(context.Background(), tx, receipt.BlockHash, receipt.TransactionIndex)
+	if err != nil {
+		oCommon.Logger.Warningf("GetTransactionDetail TransactionSender fail. | err: %s", err)
+		ctrl.Exception(ctx, exception.New(exception.CodeInternalError))
+		return
+	}
 
 	rsp := &blockchain.GetTransactionRsp{
 		Code:    consts.RespCodeSuccess,
 		Message: consts.RespMsgSuccess,
 		Data: &blockchain.Transaction{
-			Tx:       "aaa",
-			From:     "bbb",
-			To:       "ccc",
-			Amount:   balance.String(),
-			GasFee:   "0.001564548",
-			GasPrice: "0.0000024564",
+			Tx:                req.Tx,
+			From:              sender.String(),
+			To:                tx.To().String(),
+			Amount:            tx.Value().String(),
+			Gas:               tx.Gas(),
+			GasPrice:          tx.GasPrice().String(),
+			GasTip:            tx.GasTipCap().String(),
+			GasFee:            tx.GasFeeCap().String(),
+			Nonce:             tx.Nonce(),
+			Cost:              tx.Cost().String(),
+			ChainId:           tx.ChainId().String(),
+			IsPending:         ispending,
+			BlockHash:         receipt.BlockHash.String(),
+			BlockNumber:       receipt.BlockNumber.String(),
+			TransactionIndex:  uint64(receipt.TransactionIndex),
+			Type:              uint32(receipt.Type),
+			Status:            receipt.Status,
+			GasUsed:           receipt.GasUsed,
+			EffectiveGasPrice: receipt.EffectiveGasPrice.String(),
+		},
+	}
+
+	ctrl.SendRsp(ctx, rsp)
+}
+
+func (c *blockChainCtrl) GetAccountDetail(ctx *gin.Context) {
+	req := &blockchain.GetAccountDetailReq{
+		Address: ctx.Query("account"),
+	}
+
+	if !ctrl.ParamAssert(ctx, req, req.Address == "") {
+		return
+	}
+
+	// 0x71c7656ec7ab88b098defb751b7401b5f6d8976f
+	account := common.HexToAddress(req.Address)
+	balance, err := util.EthClient.GetClient().BalanceAt(context.Background(), account, nil)
+	if err != nil {
+		oCommon.Logger.Warningf("GetAccountDetail BalanceAt fail. | err: %s", err)
+		ctrl.Exception(ctx, exception.New(exception.CodeInternalError))
+		return
+	}
+
+	nonce, err := util.EthClient.GetClient().PendingNonceAt(context.Background(), account)
+	if err != nil {
+		oCommon.Logger.Warningf("GetAccountDetail NonceAt fail. | err: %s", err)
+		ctrl.Exception(ctx, exception.New(exception.CodeInternalError))
+		return
+	}
+
+	rsp := &blockchain.GetAccountDetailRsp{
+		Code:    consts.RespCodeSuccess,
+		Message: consts.RespMsgSuccess,
+		Data: &blockchain.EthAccount{
+			Address: req.Address,
+			Balance: balance.String(),
+			Nonce:   nonce,
+		},
+	}
+
+	ctrl.SendRsp(ctx, rsp)
+}
+
+func (c *blockChainCtrl) GetEthSuggestGas(ctx *gin.Context) {
+	gasPrice, err := util.EthClient.GetClient().SuggestGasPrice(context.Background())
+	if err != nil {
+		oCommon.Logger.Warningf("GetEthSuggestGas SuggestGasPrice fail. | err: %s", err)
+		ctrl.Exception(ctx, exception.New(exception.CodeInternalError))
+		return
+	}
+
+	gasTipCap, err := util.EthClient.GetClient().SuggestGasTipCap(context.Background())
+	if err != nil {
+		oCommon.Logger.Warningf("GetAccountDetail NonceAt fail. | err: %s", err)
+		ctrl.Exception(ctx, exception.New(exception.CodeInternalError))
+		return
+	}
+
+	rsp := &blockchain.GetEthSuggestGasRsp{
+		Code:    consts.RespCodeSuccess,
+		Message: consts.RespMsgSuccess,
+		Data: &blockchain.GasDetail{
+			GasPriceSuggest:  gasPrice.String(),
+			GasTipCapSuggest: gasTipCap.String(),
 		},
 	}
 

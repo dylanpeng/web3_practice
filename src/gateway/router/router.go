@@ -24,6 +24,8 @@ func (r *router) RegHttpHandler(app *gin.Engine) {
 
 	apiGroup := app.Group("/blockchain")
 	{
-		apiGroup.POST("/transaction/detail", control.BlockChain.GetTransactionDetail)
+		apiGroup.GET("/transaction/detail/:tx", control.BlockChain.GetTransactionDetail)
+		apiGroup.GET("/account/detail", control.BlockChain.GetAccountDetail)
+		apiGroup.GET("/gas/suggest", control.BlockChain.GetEthSuggestGas)
 	}
 }
