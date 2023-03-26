@@ -22,10 +22,16 @@ func (r *router) RegHttpHandler(app *gin.Engine) {
 	app.Use(middleware.CrossDomain)
 	app.Use(middleware.Trace)
 
-	apiGroup := app.Group("/blockchain")
+	blockchainGroup := app.Group("/blockchain")
 	{
-		apiGroup.GET("/transaction/detail/:tx", control.BlockChain.GetTransactionDetail)
-		apiGroup.GET("/account/detail", control.BlockChain.GetAccountDetail)
-		apiGroup.GET("/gas/suggest", control.BlockChain.GetEthSuggestGas)
+		blockchainGroup.GET("/transaction/detail/:tx", control.BlockChain.GetTransactionDetail)
+		blockchainGroup.GET("/account/detail", control.BlockChain.GetAccountDetail)
+		blockchainGroup.GET("/gas/suggest", control.BlockChain.GetEthSuggestGas)
+	}
+
+	walletGroup := app.Group("/wallet")
+	{
+		walletGroup.GET("/key/create", control.Wallet.GetKeyPair)
+		walletGroup.GET("/mnemonic/create", control.Wallet.GetMnemonic)
 	}
 }

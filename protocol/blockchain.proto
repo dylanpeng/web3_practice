@@ -108,3 +108,39 @@ message GasDetail{
     // gas tip cap suggest
     string gas_tip_cap_suggest = 2;
 }
+
+// HTTP Get request: /wallet/key/create
+message GetKeyPairRsp{
+    // response code
+    int64 code = 1;
+    // response message
+    string message = 2;
+
+    // 账号
+    KeyPair data = 3;
+}
+
+// HTTP Get request: /wallet/mnemonic/create
+message GetMnemonicRsp{
+    // response code
+    int64 code = 1;
+    // response message
+    string message = 2;
+
+    // 账号
+    KeyPair data = 3;
+}
+
+message KeyPair{
+    // private_key
+    string private_key = 1;
+
+    // public_key
+    string public_key = 2;
+
+    // address
+    string address = 3;
+
+    // mnemonic
+    string mnemonic = 4;
+}

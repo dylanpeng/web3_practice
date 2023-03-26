@@ -668,6 +668,215 @@ func (x *GasDetail) GetGasTipCapSuggest() string {
 	return ""
 }
 
+// HTTP Get request: /wallet/key/create
+type GetKeyPairRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// response code
+	Code int64 `protobuf:"varint,1,opt,name=code,proto3" json:"code" form:"code"`
+	// response message
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message" form:"message"`
+	// 账号
+	Data *KeyPair `protobuf:"bytes,3,opt,name=data,proto3" json:"data" form:"data"`
+}
+
+func (x *GetKeyPairRsp) Reset() {
+	*x = GetKeyPairRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_blockchain_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetKeyPairRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetKeyPairRsp) ProtoMessage() {}
+
+func (x *GetKeyPairRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_blockchain_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetKeyPairRsp.ProtoReflect.Descriptor instead.
+func (*GetKeyPairRsp) Descriptor() ([]byte, []int) {
+	return file_blockchain_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetKeyPairRsp) GetCode() int64 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *GetKeyPairRsp) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *GetKeyPairRsp) GetData() *KeyPair {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+// HTTP Get request: /wallet/mnemonic/create
+type GetMnemonicRsp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// response code
+	Code int64 `protobuf:"varint,1,opt,name=code,proto3" json:"code" form:"code"`
+	// response message
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message" form:"message"`
+	// 账号
+	Data *KeyPair `protobuf:"bytes,3,opt,name=data,proto3" json:"data" form:"data"`
+}
+
+func (x *GetMnemonicRsp) Reset() {
+	*x = GetMnemonicRsp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_blockchain_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetMnemonicRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMnemonicRsp) ProtoMessage() {}
+
+func (x *GetMnemonicRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_blockchain_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMnemonicRsp.ProtoReflect.Descriptor instead.
+func (*GetMnemonicRsp) Descriptor() ([]byte, []int) {
+	return file_blockchain_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetMnemonicRsp) GetCode() int64 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *GetMnemonicRsp) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *GetMnemonicRsp) GetData() *KeyPair {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type KeyPair struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// private_key
+	PrivateKey string `protobuf:"bytes,1,opt,name=private_key,json=privateKey,proto3" json:"private_key" form:"private_key"`
+	// public_key
+	PublicKey string `protobuf:"bytes,2,opt,name=public_key,json=publicKey,proto3" json:"public_key" form:"public_key"`
+	// address
+	Address string `protobuf:"bytes,3,opt,name=address,proto3" json:"address" form:"address"`
+	// mnemonic
+	Mnemonic string `protobuf:"bytes,4,opt,name=mnemonic,proto3" json:"mnemonic" form:"mnemonic"`
+}
+
+func (x *KeyPair) Reset() {
+	*x = KeyPair{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_blockchain_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *KeyPair) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*KeyPair) ProtoMessage() {}
+
+func (x *KeyPair) ProtoReflect() protoreflect.Message {
+	mi := &file_blockchain_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use KeyPair.ProtoReflect.Descriptor instead.
+func (*KeyPair) Descriptor() ([]byte, []int) {
+	return file_blockchain_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *KeyPair) GetPrivateKey() string {
+	if x != nil {
+		return x.PrivateKey
+	}
+	return ""
+}
+
+func (x *KeyPair) GetPublicKey() string {
+	if x != nil {
+		return x.PublicKey
+	}
+	return ""
+}
+
+func (x *KeyPair) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *KeyPair) GetMnemonic() string {
+	if x != nil {
+		return x.Mnemonic
+	}
+	return ""
+}
+
 var File_blockchain_proto protoreflect.FileDescriptor
 
 var file_blockchain_proto_rawDesc = []byte{
@@ -745,9 +954,30 @@ var file_blockchain_proto_rawDesc = []byte{
 	0x67, 0x65, 0x73, 0x74, 0x12, 0x2d, 0x0a, 0x13, 0x67, 0x61, 0x73, 0x5f, 0x74, 0x69, 0x70, 0x5f,
 	0x63, 0x61, 0x70, 0x5f, 0x73, 0x75, 0x67, 0x67, 0x65, 0x73, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x10, 0x67, 0x61, 0x73, 0x54, 0x69, 0x70, 0x43, 0x61, 0x70, 0x53, 0x75, 0x67, 0x67,
-	0x65, 0x73, 0x74, 0x42, 0x16, 0x5a, 0x14, 0x6c, 0x69, 0x62, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2f, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x65, 0x73, 0x74, 0x22, 0x66, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x4b, 0x65, 0x79, 0x50, 0x61, 0x69,
+	0x72, 0x52, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x12, 0x27, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x13, 0x2e, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x4b, 0x65,
+	0x79, 0x50, 0x61, 0x69, 0x72, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x67, 0x0a, 0x0e, 0x47,
+	0x65, 0x74, 0x4d, 0x6e, 0x65, 0x6d, 0x6f, 0x6e, 0x69, 0x63, 0x52, 0x73, 0x70, 0x12, 0x12, 0x0a,
+	0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x27, 0x0a, 0x04, 0x64,
+	0x61, 0x74, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x62, 0x6c, 0x6f, 0x63,
+	0x6b, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x2e, 0x4b, 0x65, 0x79, 0x50, 0x61, 0x69, 0x72, 0x52, 0x04,
+	0x64, 0x61, 0x74, 0x61, 0x22, 0x7f, 0x0a, 0x07, 0x4b, 0x65, 0x79, 0x50, 0x61, 0x69, 0x72, 0x12,
+	0x1f, 0x0a, 0x0b, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x4b, 0x65, 0x79,
+	0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x4b, 0x65, 0x79, 0x12,
+	0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x6e, 0x65,
+	0x6d, 0x6f, 0x6e, 0x69, 0x63, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6d, 0x6e, 0x65,
+	0x6d, 0x6f, 0x6e, 0x69, 0x63, 0x42, 0x16, 0x5a, 0x14, 0x6c, 0x69, 0x62, 0x2f, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x2f, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -762,7 +992,7 @@ func file_blockchain_proto_rawDescGZIP() []byte {
 	return file_blockchain_proto_rawDescData
 }
 
-var file_blockchain_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_blockchain_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_blockchain_proto_goTypes = []interface{}{
 	(*Transaction)(nil),         // 0: blockchain.Transaction
 	(*GetTransactionReq)(nil),   // 1: blockchain.GetTransactionReq
@@ -773,16 +1003,21 @@ var file_blockchain_proto_goTypes = []interface{}{
 	(*GetEthSuggestGasReq)(nil), // 6: blockchain.GetEthSuggestGasReq
 	(*GetEthSuggestGasRsp)(nil), // 7: blockchain.GetEthSuggestGasRsp
 	(*GasDetail)(nil),           // 8: blockchain.GasDetail
+	(*GetKeyPairRsp)(nil),       // 9: blockchain.GetKeyPairRsp
+	(*GetMnemonicRsp)(nil),      // 10: blockchain.GetMnemonicRsp
+	(*KeyPair)(nil),             // 11: blockchain.KeyPair
 }
 var file_blockchain_proto_depIdxs = []int32{
-	0, // 0: blockchain.GetTransactionRsp.data:type_name -> blockchain.Transaction
-	5, // 1: blockchain.GetAccountDetailRsp.data:type_name -> blockchain.EthAccount
-	8, // 2: blockchain.GetEthSuggestGasRsp.data:type_name -> blockchain.GasDetail
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0,  // 0: blockchain.GetTransactionRsp.data:type_name -> blockchain.Transaction
+	5,  // 1: blockchain.GetAccountDetailRsp.data:type_name -> blockchain.EthAccount
+	8,  // 2: blockchain.GetEthSuggestGasRsp.data:type_name -> blockchain.GasDetail
+	11, // 3: blockchain.GetKeyPairRsp.data:type_name -> blockchain.KeyPair
+	11, // 4: blockchain.GetMnemonicRsp.data:type_name -> blockchain.KeyPair
+	5,  // [5:5] is the sub-list for method output_type
+	5,  // [5:5] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_blockchain_proto_init() }
@@ -899,6 +1134,42 @@ func file_blockchain_proto_init() {
 				return nil
 			}
 		}
+		file_blockchain_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetKeyPairRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_blockchain_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetMnemonicRsp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_blockchain_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*KeyPair); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -906,7 +1177,7 @@ func file_blockchain_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_blockchain_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
